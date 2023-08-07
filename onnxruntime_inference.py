@@ -4,13 +4,13 @@ import onnxruntime
 from utils import *
 
 
-conf_thres=0.25
-iou_thres=0.45
+conf_thres = 0.25
+iou_thres = 0.45
 input_width = 640
 input_height = 480
 result_path = "./result"
 image_path = "./dataset/bus.jpg"
-model_path = "./model/yolov8n-seg-480-640.onnx"
+model_path = f"./model/yolov8n-seg-{input_height}-{input_width}.onnx"
 video_path = "test.mp4"
 video_inference = False
 CLASSES = ['person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck', 'boat', 'traffic light', 'fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird', 'cat', 'dog', 'horse', 'sheep', 'cow', 'elephant', 'bear', 'zebra', 'giraffe', 'backpack', 'umbrella', 'handbag', 'tie', 'suitcase', 'frisbee', 'skis','snowboard', 'sports ball', 'kite', 'baseball bat', 'baseball glove', 'skateboard', 'surfboard', 'tennis racket', 'bottle', 'wine glass', 'cup', 'fork', 'knife', 'spoon', 'bowl', 'banana', 'apple', 'sandwich', 'orange', 'broccoli', 'carrot', 'hot dog', 'pizza', 'donut', 'cake', 'chair', 'couch', 'potted plant', 'bed', 'dining table', 'toilet', 'tv', 'laptop', 'mouse', 'remote', 'keyboard', 'cell phone', 'microwave', 'oven', 'toaster', 'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors', 'teddy bear', 'hair drier', 'toothbrush']

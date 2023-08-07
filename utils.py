@@ -259,7 +259,7 @@ def vis_result(image_3c, results, colorlist, CLASSES, result_path, scores):
             if np.isnan(centroid).all() == False:
                 centroid_x, centroid_y = int(centroid[1]), int(centroid[0])
                 center_list.append([centroid_x, centroid_y])
-        vis_img = vis_img*0.5 + mask_img*0.5
+        vis_img = cv2.addWeighted(vis_img,0.5,mask_img,0.5,0)
         scores = scores.round(2)
         for i, box in enumerate (boxes):
             cls=int(box[-1])
