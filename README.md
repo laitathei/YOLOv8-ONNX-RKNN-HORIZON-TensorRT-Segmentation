@@ -37,7 +37,7 @@ python3 onnx2rknn_step1.py
 python3 onnx2rknn_step2.py
 ```
 
-## 5. RKNN-Lite Inference (not finish yet)
+## 5. RKNN-Lite Inference
 ```
 python3 rknn_inference.py
 ```
