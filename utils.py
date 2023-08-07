@@ -56,7 +56,7 @@ def process_mask(protos, masks_in, bboxes, shape):
     masks = np.transpose(masks, [1,2,0])
     # masks = cv2.resize(masks, (shape[1], shape[0]), interpolation=cv2.INTER_NEAREST)
     masks = cv2.resize(masks, (shape[1], shape[0]), interpolation=cv2.INTER_LINEAR)
-    if masks.ndim == 3:
+    if type(masks) != list and masks.ndim == 3:
         masks = np.transpose(masks, [2,0,1])
 
     return np.where(masks>0.5,masks,0)
@@ -242,7 +242,7 @@ def gen_color(class_num):
 def vis_result(image_3c, results, colorlist, CLASSES, result_path, scores):
     boxes, masks, shape = results
 
-    if masks.ndim == 3:
+    if type(masks) != list and masks.ndim == 3:
         # Convert the image_3c color space from BGR to RGB
         image_3c = cv2.cvtColor(image_3c, cv2.COLOR_RGB2BGR)
         vis_img = image_3c.copy()
