@@ -20,7 +20,7 @@ class onnx_ros_inference():
         self.input_height = 480
         model_path = f"./model/yolov8n-seg-{self.input_height}-{self.input_width}.onnx"
         self.CLASSES = ['person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck', 'boat', 'traffic light', 'fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird', 'cat', 'dog', 'horse', 'sheep', 'cow', 'elephant', 'bear', 'zebra', 'giraffe', 'backpack', 'umbrella', 'handbag', 'tie', 'suitcase', 'frisbee', 'skis','snowboard', 'sports ball', 'kite', 'baseball bat', 'baseball glove', 'skateboard', 'surfboard', 'tennis racket', 'bottle', 'wine glass', 'cup', 'fork', 'knife', 'spoon', 'bowl', 'banana', 'apple', 'sandwich', 'orange', 'broccoli', 'carrot', 'hot dog', 'pizza', 'donut', 'cake', 'chair', 'couch', 'potted plant', 'bed', 'dining table', 'toilet', 'tv', 'laptop', 'mouse', 'remote', 'keyboard', 'cell phone', 'microwave', 'oven', 'toaster', 'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors', 'teddy bear', 'hair drier', 'toothbrush']
-        self.sess = onnxruntime.InferenceSession(model_path) # model_height_width.onnx
+        self.sess = onnxruntime.InferenceSession(model_path)
         self.images = self.sess.get_inputs()[0].name
         self.output0 = self.sess.get_outputs()[0].name
         self.output1 = self.sess.get_outputs()[1].name
@@ -61,9 +61,9 @@ class onnx_ros_inference():
             rospy.wait_for_message("/aligned_depth_to_color/image_raw",Image)
             image_4c, image_3c = preprocess(self.color_image, self.input_height, self.input_width)
             outputs = self.sess.run([self.output0, self.output1],{self.images: image_4c.astype(np.float32)}) # (1, 2, 352, 640)
-            colorlist = gen_color(len(self.CLASSES))  ## 获取着色时的颜色信息
+            colorlist = gen_color(len(self.CLASSES))
             results, scores = postprocess(outputs, image_4c, image_3c, self.conf_thres, self.iou_thres, classes=len(self.CLASSES)) ##[box,mask,shape]
-            results = results[0]              ## batch=1,取第一个数据即可
+            results = results[0]              ## batch=1
             boxes, masks, shape = results
             if isinstance(masks, np.ndarray):
                 vis_img = image_3c.copy()
