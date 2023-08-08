@@ -66,6 +66,8 @@ class onnx_ros_inference():
             results = results[0]              ## batch=1
             boxes, masks, shape = results
             if isinstance(masks, np.ndarray):
+                if masks.ndim == 2:
+                    masks = np.expand_dims(masks, axis=0).astype(np.float32)
                 vis_img = image_3c.copy()
                 mask_img = np.zeros_like(image_3c)
                 cls_list = []
