@@ -21,7 +21,7 @@ def get_dataset_txt(dataset_path, dataset_savefile):
 def move_onnx_config():
     file_data = glob.glob("*.onnx")
     for file in file_data:
-        shutil.move(file, f"./{config_path}/{file}")
+        shutil.move(file, f"{config_path}/{file}")
 
 if __name__ == '__main__':
     isExist = os.path.exists(dataset_path)
@@ -62,9 +62,9 @@ if __name__ == '__main__':
     rknn.release()
 
     print('--> Move hybrid quatization config into config folder')
-    shutil.move(f"{model_name}-{input_height}-{input_width}.data", f"./{config_path}/{model_name}-{input_height}-{input_width}.data")
-    shutil.move(f"{model_name}-{input_height}-{input_width}.model", f"./{config_path}/{model_name}-{input_height}-{input_width}.model")
-    shutil.move(f"{model_name}-{input_height}-{input_width}.quantization.cfg", f"./{config_path}/{model_name}-{input_height}-{input_width}.quantization.cfg")
+    shutil.move(f"{model_name}-{input_height}-{input_width}.data", f"{config_path}/{model_name}-{input_height}-{input_width}.data")
+    shutil.move(f"{model_name}-{input_height}-{input_width}.model", f"{config_path}/{model_name}-{input_height}-{input_width}.model")
+    shutil.move(f"{model_name}-{input_height}-{input_width}.quantization.cfg", f"{config_path}/{model_name}-{input_height}-{input_width}.quantization.cfg")
 
     print('--> Move onnx config into config folder')
     move_onnx_config()
