@@ -44,7 +44,7 @@ if __name__ == '__main__':
     print('done')
 
     print('--> Move RKNN file into model folder')
-    shutil.move(RKNN_MODEL, f"./{model_path}/{RKNN_MODEL}")
+    shutil.move(RKNN_MODEL, f"{model_path}/{RKNN_MODEL}")
 
     # Init runtime environment
     print('--> Init runtime environment')
