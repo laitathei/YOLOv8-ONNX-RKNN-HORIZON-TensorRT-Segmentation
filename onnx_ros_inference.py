@@ -62,7 +62,7 @@ class onnx_ros_inference():
             image_4c, image_3c = preprocess(self.color_image, self.input_height, self.input_width)
             outputs = self.sess.run([self.output0, self.output1],{self.images: image_4c.astype(np.float32)}) # (1, 2, 352, 640)
             colorlist = gen_color(len(self.CLASSES))
-            results, scores = postprocess(outputs, image_4c, image_3c, self.conf_thres, self.iou_thres, classes=len(self.CLASSES)) ##[box,mask,shape]
+            results = postprocess(outputs, image_4c, image_3c, self.conf_thres, self.iou_thres, classes=len(self.CLASSES)) ##[box,mask,shape]
             results = results[0]              ## batch=1
             boxes, masks, shape = results
             if isinstance(masks, np.ndarray):
@@ -83,11 +83,10 @@ class onnx_ros_inference():
                         centroid_x, centroid_y = int(centroid[1]), int(centroid[0])
                         center_list.append([centroid_x, centroid_y])
                 vis_img = cv2.addWeighted(vis_img,0.5,mask_img,0.5,0)
-                scores = scores.round(2)
                 for i, box in enumerate (boxes):
                     cls=int(box[-1])
                     cv2.rectangle(vis_img, (int(box[0]), int(box[1])), (int(box[2]), int(box[3])), (0,0,255),3,4)
-                    cv2.putText(vis_img, f"{self.CLASSES[cls]}:{scores[i]}", (int(box[0]), int(box[1])), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+                    cv2.putText(vis_img, f"{self.CLASSES[cls]}:{round(box[4],2)}", (int(box[0]), int(box[1])), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
                 for j in range (len(center_list)):
                     cv2.circle(vis_img, (center_list[j][0], center_list[j][1]), radius=5, color=(0, 0, 255), thickness=-1)
                 for i in range (len(self.CLASSES)):
