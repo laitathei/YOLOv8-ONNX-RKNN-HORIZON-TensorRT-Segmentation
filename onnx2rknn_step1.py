@@ -9,7 +9,7 @@ config_path = "./config"
 dataset_file = "./dataset.txt"
 model_name = 'yolov8n-seg'
 platform = "rk3588"
-ONNX_MODEL = f'./{model_path}/yolov8n-seg-{input_height}-{input_width}.onnx'
+ONNX_MODEL = f'{model_path}/{model_name}-{input_height}-{input_width}.onnx'
 OUT_NODE = ["output0","output1"]
 
 def get_dataset_txt(dataset_path, dataset_savefile):
