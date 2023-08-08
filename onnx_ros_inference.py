@@ -65,7 +65,7 @@ class onnx_ros_inference():
             results, scores = postprocess(outputs, image_4c, image_3c, self.conf_thres, self.iou_thres, classes=len(self.CLASSES)) ##[box,mask,shape]
             results = results[0]              ## batch=1,取第一个数据即可
             boxes, masks, shape = results
-            if type(masks) != list and masks.ndim == 3:
+            if isinstance(masks, np.ndarray):
                 vis_img = image_3c.copy()
                 mask_img = np.zeros_like(image_3c)
                 cls_list = []
