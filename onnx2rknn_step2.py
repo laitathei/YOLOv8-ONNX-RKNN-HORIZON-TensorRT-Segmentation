@@ -62,9 +62,9 @@ if __name__ == '__main__':
             image_4c, image_3c = preprocess(image_3c, input_height, input_width)
             print('--> Running model for video inference')
             outputs = rknn.inference(inputs=[image_3c])
-            colorlist = gen_color(len(CLASSES))  ## 获取着色时的颜色信息
+            colorlist = gen_color(len(CLASSES))
             results, scores = postprocess(outputs, image_4c, image_3c, conf_thres, iou_thres, classes=len(CLASSES)) ##[box,mask,shape]
-            results = results[0]              ## batch=1,取第一个数据即可
+            results = results[0]              ## batch=1
             boxes, masks, shape = results
             if isinstance(masks, np.ndarray):
                 mask_img, vis_img = vis_result(image_3c,  results, colorlist, CLASSES, result_path , scores)
@@ -80,9 +80,9 @@ if __name__ == '__main__':
         print('--> Running model for image inference')
         outputs = rknn.inference(inputs=[image_3c])
 
-        colorlist = gen_color(len(CLASSES))  ## 获取着色时的颜色信息
+        colorlist = gen_color(len(CLASSES))
         results, scores = postprocess(outputs, image_4c, image_3c, conf_thres, iou_thres, classes=len(CLASSES)) ##[box,mask,shape]
-        results = results[0]              ## batch=1,取第一个数据即可
+        results = results[0]              ## batch=1
         boxes, masks, shape = results
         if isinstance(masks, np.ndarray):
             mask_img, vis_img = vis_result(image_3c,  results, colorlist, CLASSES, result_path, scores)
