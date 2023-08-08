@@ -112,8 +112,6 @@ def non_max_suppression(
     nm = prediction.shape[1] - nc - 4     # num_masks
     mi = 4 + nc                           # mask start index
     xc = np.max(prediction[:, 4:mi], axis=1) > conf_thres ## 【lulu】
-    scores = np.max(np.squeeze(prediction).T[:, 4:4+nc], axis=1)
-    scores = scores[scores > conf_thres]
 
     # Settings
     # min_wh = 2  # (pixels) minimum box width and height
@@ -154,12 +152,11 @@ def non_max_suppression(
         i = i[:max_det]  # limit detections
 
         output[xi] = x[i]
-        scores = scores[i]
 
         if (time.time() - t) > time_limit:
             # LOGGER.warning(f'WARNING ⚠️ NMS time limit {time_limit:.3f}s exceeded')
             break  # time limit exceeded
-    return output, scores
+    return output
 
 def make_anchors(feats_shape, strides, grid_cell_offset=0.5):
     """Generate anchors from features."""
@@ -209,7 +206,7 @@ def preprocess(image, input_height, input_width):
     return image_4c, image_3c
 
 def postprocess(preds, img, orig_img, OBJ_THRESH, NMS_THRESH, classes=None):
-    p, scores = non_max_suppression(preds[0],
+    p = non_max_suppression(preds[0],
                                 OBJ_THRESH,
                                 NMS_THRESH,
                                 agnostic=False,
@@ -227,7 +224,7 @@ def postprocess(preds, img, orig_img, OBJ_THRESH, NMS_THRESH, classes=None):
         masks = process_mask(proto[i], pred[:, 6:], pred[:, :4], img.shape[2:])  # HWC
         pred[:, :4] = scale_boxes(img.shape[2:], pred[:, :4], shape).round()
         results.append([pred[:, :6], masks, shape[:2]])
-    return results, scores
+    return results
 
 def gen_color(class_num):
     color_list = []
@@ -239,7 +236,7 @@ def gen_color(class_num):
         if len(color_list)==class_num: break
     return color_list
 
-def vis_result(image_3c, results, colorlist, CLASSES, result_path, scores):
+def vis_result(image_3c, results, colorlist, CLASSES, result_path):
     boxes, masks, shape = results
 
     if masks.ndim == 2:
@@ -261,11 +258,10 @@ def vis_result(image_3c, results, colorlist, CLASSES, result_path, scores):
             centroid_x, centroid_y = int(centroid[1]), int(centroid[0])
             center_list.append([centroid_x, centroid_y])
     vis_img = cv2.addWeighted(vis_img,0.5,mask_img,0.5,0)
-    scores = scores.round(2)
     for i, box in enumerate (boxes):
         cls=int(box[-1])
         cv2.rectangle(vis_img, (int(box[0]), int(box[1])), (int(box[2]), int(box[3])), (0,0,255),3,4)
-        cv2.putText(vis_img, f"{CLASSES[cls]}:{scores[i]}", (int(box[0]), int(box[1])), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+        cv2.putText(vis_img, f"{CLASSES[cls]}:{round(box[4],2)}", (int(box[0]), int(box[1])), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
     for j in range (len(center_list)):
         cv2.circle(vis_img, (center_list[j][0], center_list[j][1]), radius=5, color=(0, 0, 255), thickness=-1)
     vis_img = np.concatenate([image_3c, mask_img, vis_img],axis=1)
