@@ -41,7 +41,7 @@ python3 onnx2rknn_step2.py
 
 ## 5. RKNN-Lite Inference
 ```
-python3 rknn_inference.py
+python3 rknn_lite_inference.py
 ```
 
 ## Reference
