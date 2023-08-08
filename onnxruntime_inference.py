@@ -33,11 +33,11 @@ if video_inference == True:
         print('--> Running model for video inference')
         outputs = sess.run([output0, output1],{images: image_4c.astype(np.float32)}) # (1, 3, input height, input width)
         colorlist = gen_color(len(CLASSES))
-        results, scores = postprocess(outputs, image_4c, image_3c, conf_thres, iou_thres, classes=len(CLASSES)) ##[box,mask,shape]
+        results = postprocess(outputs, image_4c, image_3c, conf_thres, iou_thres, classes=len(CLASSES)) ##[box,mask,shape]
         results = results[0]              ## batch=1
         boxes, masks, shape = results
         if isinstance(masks, np.ndarray):
-            mask_img, vis_img = vis_result(image_3c,  results, colorlist, CLASSES, result_path , scores)
+            mask_img, vis_img = vis_result(image_3c,  results, colorlist, CLASSES, result_path)
             cv2.imshow("mask_img", mask_img)
             cv2.imshow("vis_img", vis_img)
         else:
@@ -48,11 +48,11 @@ else:
     image_4c, image_3c = preprocess(image_3c, input_height, input_width)
     outputs = sess.run([output0, output1],{images: image_4c.astype(np.float32)}) # (1, 3, input height, input width)
     colorlist = gen_color(len(CLASSES)) 
-    results, scores = postprocess(outputs, image_4c, image_3c, conf_thres, iou_thres, classes=len(CLASSES)) ##[box,mask,shape]
+    results = postprocess(outputs, image_4c, image_3c, conf_thres, iou_thres, classes=len(CLASSES)) ##[box,mask,shape]
     results = results[0]              ## batch=1
     boxes, masks, shape = results
     if isinstance(masks, np.ndarray):
-        mask_img, vis_img = vis_result(image_3c,  results, colorlist, CLASSES, result_path, scores)
+        mask_img, vis_img = vis_result(image_3c,  results, colorlist, CLASSES, result_path)
         print('--> Save inference result')
     else:
         print("No segmentation result")
