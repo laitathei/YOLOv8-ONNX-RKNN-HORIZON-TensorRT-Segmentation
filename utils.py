@@ -242,37 +242,38 @@ def gen_color(class_num):
 def vis_result(image_3c, results, colorlist, CLASSES, result_path, scores):
     boxes, masks, shape = results
 
-    if type(masks) != list and masks.ndim == 3:
-        # Convert the image_3c color space from BGR to RGB
-        image_3c = cv2.cvtColor(image_3c, cv2.COLOR_RGB2BGR)
-        vis_img = image_3c.copy()
-        mask_img = np.zeros_like(image_3c)
-        cls_list = []
-        center_list = []
-        for box, mask in zip(boxes, masks):
-            cls=int(box[-1])
-            cls_list.append(cls)
-            dummy_img = np.zeros_like(image_3c)
-            dummy_img[mask!=0] = colorlist[int(box[-1])] ## cls=int(box[-1])
-            mask_img[mask!=0] = colorlist[int(box[-1])] ## cls=int(box[-1])
-            centroid = np.mean(np.argwhere(dummy_img),axis=0)
-            if np.isnan(centroid).all() == False:
-                centroid_x, centroid_y = int(centroid[1]), int(centroid[0])
-                center_list.append([centroid_x, centroid_y])
-        vis_img = cv2.addWeighted(vis_img,0.5,mask_img,0.5,0)
-        scores = scores.round(2)
-        for i, box in enumerate (boxes):
-            cls=int(box[-1])
-            cv2.rectangle(vis_img, (int(box[0]), int(box[1])), (int(box[2]), int(box[3])), (0,0,255),3,4)
-            cv2.putText(vis_img, f"{CLASSES[cls]}:{scores[i]}", (int(box[0]), int(box[1])), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-        for j in range (len(center_list)):
-            cv2.circle(vis_img, (center_list[j][0], center_list[j][1]), radius=5, color=(0, 0, 255), thickness=-1)
-        vis_img = np.concatenate([image_3c, mask_img, vis_img],axis=1)
-        for i in range (len(CLASSES)):
-            num = cls_list.count(i)
-            if num != 0:
-                print(f"Found {num} {CLASSES[i]}")
-        cv2.imwrite(f"./{result_path}/origin_image.jpg", image_3c)
-        cv2.imwrite(f"./{result_path}/mask_image.jpg", mask_img)
-        cv2.imwrite(f"./{result_path}/visual_image.jpg", vis_img)
-        return mask_img, vis_img
+    if masks.ndim == 2:
+        masks = np.expand_dims(masks, axis=0).astype(np.float32)
+    # Convert the image_3c color space from BGR to RGB
+    image_3c = cv2.cvtColor(image_3c, cv2.COLOR_RGB2BGR)
+    vis_img = image_3c.copy()
+    mask_img = np.zeros_like(image_3c)
+    cls_list = []
+    center_list = []
+    for box, mask in zip(boxes, masks):
+        cls=int(box[-1])
+        cls_list.append(cls)
+        dummy_img = np.zeros_like(image_3c)
+        dummy_img[mask!=0] = colorlist[int(box[-1])] ## cls=int(box[-1])
+        mask_img[mask!=0] = colorlist[int(box[-1])] ## cls=int(box[-1])
+        centroid = np.mean(np.argwhere(dummy_img),axis=0)
+        if np.isnan(centroid).all() == False:
+            centroid_x, centroid_y = int(centroid[1]), int(centroid[0])
+            center_list.append([centroid_x, centroid_y])
+    vis_img = cv2.addWeighted(vis_img,0.5,mask_img,0.5,0)
+    scores = scores.round(2)
+    for i, box in enumerate (boxes):
+        cls=int(box[-1])
+        cv2.rectangle(vis_img, (int(box[0]), int(box[1])), (int(box[2]), int(box[3])), (0,0,255),3,4)
+        cv2.putText(vis_img, f"{CLASSES[cls]}:{scores[i]}", (int(box[0]), int(box[1])), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+    for j in range (len(center_list)):
+        cv2.circle(vis_img, (center_list[j][0], center_list[j][1]), radius=5, color=(0, 0, 255), thickness=-1)
+    vis_img = np.concatenate([image_3c, mask_img, vis_img],axis=1)
+    for i in range (len(CLASSES)):
+        num = cls_list.count(i)
+        if num != 0:
+            print(f"Found {num} {CLASSES[i]}")
+    cv2.imwrite(f"./{result_path}/origin_image.jpg", image_3c)
+    cv2.imwrite(f"./{result_path}/mask_image.jpg", mask_img)
+    cv2.imwrite(f"./{result_path}/visual_image.jpg", vis_img)
+    return mask_img, vis_img
