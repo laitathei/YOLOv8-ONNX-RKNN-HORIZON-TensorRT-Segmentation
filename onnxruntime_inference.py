@@ -19,6 +19,10 @@ sess = onnxruntime.InferenceSession(model_path) # model_height_width.onnx
 images = sess.get_inputs()[0].name
 output0 = sess.get_outputs()[0].name
 output1 = sess.get_outputs()[1].name
+isExist = os.path.exists(result_path)
+if not isExist:
+    os.makedirs(result_path)
+
 if video_inference == True:
     cap = cv2.VideoCapture(video_path)
     while(True):
