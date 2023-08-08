@@ -66,7 +66,7 @@ if __name__ == '__main__':
             results, scores = postprocess(outputs, image_4c, image_3c, conf_thres, iou_thres, classes=len(CLASSES)) ##[box,mask,shape]
             results = results[0]              ## batch=1,取第一个数据即可
             boxes, masks, shape = results
-            if type(masks) != list and masks.ndim == 3:
+            if isinstance(masks, np.ndarray):
                 mask_img, vis_img = vis_result(image_3c,  results, colorlist, CLASSES, result_path , scores)
                 cv2.imshow("mask_img", mask_img)
                 cv2.imshow("vis_img", vis_img)
@@ -84,7 +84,7 @@ if __name__ == '__main__':
         results, scores = postprocess(outputs, image_4c, image_3c, conf_thres, iou_thres, classes=len(CLASSES)) ##[box,mask,shape]
         results = results[0]              ## batch=1,取第一个数据即可
         boxes, masks, shape = results
-        if type(masks) != list and masks.ndim == 3:
+        if isinstance(masks, np.ndarray):
             mask_img, vis_img = vis_result(image_3c,  results, colorlist, CLASSES, result_path, scores)
             print('--> Save inference result')
         else:
