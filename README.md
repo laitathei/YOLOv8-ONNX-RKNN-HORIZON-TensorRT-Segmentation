@@ -1,6 +1,8 @@
 # YOLOv8-ONNX-RKNN-Segmentation
 ***Remark: This repo only support 1 batch size***
-
+```
+git clone --recursive https://github.com/laitathei/YOLOv8-ONNX-RKNN-Segmentation
+```
 ## 0. Environment Setting
 ```
 torch: 1.10.1+cu102
