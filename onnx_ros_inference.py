@@ -18,9 +18,11 @@ class onnx_ros_inference():
         self.segmented_image_publisher = rospy.Publisher("/segmented_image", Image, queue_size=10)
         self.input_width = 640
         self.input_height = 480
-        model_path = f"./model/yolov8n-seg-{self.input_height}-{self.input_width}.onnx"
+        model_name = 'yolov8n-seg'
+        model_path = "./model"
+        ONNX_MODEL = f"{model_path}/{model_name}-{input_height}-{input_width}.onnx"
         self.CLASSES = ['person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck', 'boat', 'traffic light', 'fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird', 'cat', 'dog', 'horse', 'sheep', 'cow', 'elephant', 'bear', 'zebra', 'giraffe', 'backpack', 'umbrella', 'handbag', 'tie', 'suitcase', 'frisbee', 'skis','snowboard', 'sports ball', 'kite', 'baseball bat', 'baseball glove', 'skateboard', 'surfboard', 'tennis racket', 'bottle', 'wine glass', 'cup', 'fork', 'knife', 'spoon', 'bowl', 'banana', 'apple', 'sandwich', 'orange', 'broccoli', 'carrot', 'hot dog', 'pizza', 'donut', 'cake', 'chair', 'couch', 'potted plant', 'bed', 'dining table', 'toilet', 'tv', 'laptop', 'mouse', 'remote', 'keyboard', 'cell phone', 'microwave', 'oven', 'toaster', 'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors', 'teddy bear', 'hair drier', 'toothbrush']
-        self.sess = onnxruntime.InferenceSession(model_path)
+        self.sess = onnxruntime.InferenceSession(ONNX_MODEL)
         self.images = self.sess.get_inputs()[0].name
         self.output0 = self.sess.get_outputs()[0].name
         self.output1 = self.sess.get_outputs()[1].name
