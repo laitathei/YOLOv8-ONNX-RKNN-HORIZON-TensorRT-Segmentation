@@ -56,8 +56,7 @@ def process_mask(protos, masks_in, bboxes, shape):
     masks = np.transpose(masks, [1,2,0])
     # masks = cv2.resize(masks, (shape[1], shape[0]), interpolation=cv2.INTER_NEAREST)
     masks = cv2.resize(masks, (shape[1], shape[0]), interpolation=cv2.INTER_LINEAR)
-    if type(masks) != list and masks.ndim == 3:
-        masks = np.transpose(masks, [2,0,1])
+    masks = np.transpose(masks, [2,0,1])
 
     return np.where(masks>0.5,masks,0)
 
