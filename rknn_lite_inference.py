@@ -7,13 +7,14 @@ conf_thres = 0.25
 iou_thres = 0.45
 input_width = 640
 input_height = 480
+model_name = 'yolov8n-seg'
 model_path = "./model"
 config_path = "./config"
 result_path = "./result"
 image_path = "./dataset/bus.jpg"
 video_path = "test.mp4"
 video_inference = False
-RKNN_MODEL = f'{model_path}/yolov8n-seg-{input_height}-{input_width}.rknn'
+RKNN_MODEL = f'{model_path}/{model_name}-{input_height}-{input_width}.rknn'
 CLASSES = ['person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck', 'boat', 'traffic light', 'fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird', 'cat', 'dog', 'horse', 'sheep', 'cow', 'elephant', 'bear', 'zebra', 'giraffe', 'backpack', 'umbrella', 'handbag', 'tie', 'suitcase', 'frisbee', 'skis','snowboard', 'sports ball', 'kite', 'baseball bat', 'baseball glove', 'skateboard', 'surfboard', 'tennis racket', 'bottle', 'wine glass', 'cup', 'fork', 'knife', 'spoon', 'bowl', 'banana', 'apple', 'sandwich', 'orange', 'broccoli', 'carrot', 'hot dog', 'pizza', 'donut', 'cake', 'chair', 'couch', 'potted plant', 'bed', 'dining table', 'toilet', 'tv', 'laptop', 'mouse', 'remote', 'keyboard', 'cell phone', 'microwave', 'oven', 'toaster', 'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors', 'teddy bear', 'hair drier', 'toothbrush']
 isExist = os.path.exists(result_path)
 if not isExist:
