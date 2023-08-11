@@ -62,7 +62,7 @@ class onnx_ros_inference():
             rospy.wait_for_message("/camera/color/image_raw",Image)
             rospy.wait_for_message("/aligned_depth_to_color/image_raw",Image)
             image_4c, image_3c = preprocess(self.color_image, self.input_height, self.input_width)
-            outputs = self.sess.run([self.output0, self.output1],{self.images: image_4c.astype(np.float32)}) # (1, 2, 352, 640)
+            outputs = self.sess.run([self.output0, self.output1],{self.images: image_4c.astype(np.float32)}) # (1, 3, input height, input width)
             colorlist = gen_color(len(self.CLASSES))
             results = postprocess(outputs, image_4c, image_3c, self.conf_thres, self.iou_thres, classes=len(self.CLASSES)) ##[box,mask,shape]
             results = results[0]              ## batch=1
