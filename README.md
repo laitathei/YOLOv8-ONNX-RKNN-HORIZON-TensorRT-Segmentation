@@ -1,7 +1,7 @@
 # YOLOv8-ONNX-RKNN-Segmentation
 ***Remark: This repo only support 1 batch size***
 ```
-git clone --recursive https://github.com/laitathei/YOLOv8-ONNX-RKNN-Segmentation
+git clone --recursive https://github.com/laitathei/YOLOv8-ONNX-RKNN-Segmentation.git
 ```
 ## 0. Environment Setting
 ```
