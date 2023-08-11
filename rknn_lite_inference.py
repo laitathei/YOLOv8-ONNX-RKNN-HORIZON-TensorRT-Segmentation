@@ -1,7 +1,6 @@
 import os, cv2, time, numpy as np
 from utils import *
 from rknnlite.api import RKNNLite
-from utils import preprocess
 
 conf_thres = 0.25
 iou_thres = 0.45
