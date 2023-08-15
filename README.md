@@ -1,6 +1,6 @@
 # YOLOv8-ONNX-RKNN-Segmentation
 ***Remark: This repo only support 1 batch size***
-![!YOLOv8 ONNX RKNN Segmentation Picture](https://github.com/laitathei/YOLOv8-ONNX-RKNN-Segmentation/blob/main/doc/visual_image.jpg)
+![!YOLOv8 ONNX RKNN Segmentation Picture](https://github.com/laitathei/YOLOv8-ONNX-RKNN-Segmentation/blob/master/doc/visual_image.jpg)
 ![!YOLOv8 ONNX RKNN Segmentation Video](https://github.com/laitathei/YOLOv8-ONNX-RKNN-Segmentation/blob/main/doc/output.mp4)
 ```
 git clone --recursive https://github.com/laitathei/YOLOv8-ONNX-RKNN-Segmentation.git
