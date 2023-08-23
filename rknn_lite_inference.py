@@ -41,7 +41,7 @@ if __name__ == '__main__':
             outputs[0]=np.squeeze(outputs[0])
             outputs[0] = np.expand_dims(outputs[0], axis=0)
             colorlist = gen_color(len(CLASSES))
-            results, scores = postprocess(outputs, image_4c, image_3c, conf_thres, iou_thres, classes=len(CLASSES)) ##[box,mask,shape]
+            results = postprocess(outputs, image_4c, image_3c, conf_thres, iou_thres, classes=len(CLASSES)) ##[box,mask,shape]
             results = results[0]              ## batch=1
             boxes, masks, shape = results
             if type(masks) != list and masks.ndim == 3:
@@ -62,7 +62,7 @@ if __name__ == '__main__':
         outputs[0]=np.squeeze(outputs[0])
         outputs[0] = np.expand_dims(outputs[0], axis=0)
         colorlist = gen_color(len(CLASSES))
-        results, scores = postprocess(outputs, image_4c, image_3c, conf_thres, iou_thres, classes=len(CLASSES)) ##[box,mask,shape]
+        results = postprocess(outputs, image_4c, image_3c, conf_thres, iou_thres, classes=len(CLASSES)) ##[box,mask,shape]
         results = results[0]              ## batch=1
         boxes, masks, shape = results
         if type(masks) != list and masks.ndim == 3:
