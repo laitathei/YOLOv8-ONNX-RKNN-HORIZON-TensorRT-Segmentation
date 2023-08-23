@@ -45,7 +45,7 @@ if __name__ == '__main__':
             results = results[0]              ## batch=1
             boxes, masks, shape = results
             if type(masks) != list and masks.ndim == 3:
-                mask_img, vis_img = vis_result(image_3c,  results, colorlist, CLASSES, result_path, scores)
+                mask_img, vis_img = vis_result(image_3c,  results, colorlist, CLASSES, result_path)
                 cv2.imshow("mask_img", mask_img)
                 cv2.imshow("vis_img", vis_img)
             else:
@@ -66,7 +66,7 @@ if __name__ == '__main__':
         results = results[0]              ## batch=1
         boxes, masks, shape = results
         if type(masks) != list and masks.ndim == 3:
-            mask_img, vis_img = vis_result(image_3c,  results, colorlist, CLASSES, result_path, scores)
+            mask_img, vis_img = vis_result(image_3c,  results, colorlist, CLASSES, result_path)
             print('--> Save inference result')
         else:
             print("No segmentation result")
