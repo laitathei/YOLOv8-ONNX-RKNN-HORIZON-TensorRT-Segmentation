@@ -26,9 +26,9 @@ if __name__ == '__main__':
 
     # Build model
     print('--> hybrid_quantization_step2')
-    ret = rknn.hybrid_quantization_step2(model_input=f'{config_path}/yolov8n-seg-{input_height}-{input_width}.model',
-                                         data_input=f'{config_path}/yolov8n-seg-{input_height}-{input_width}.data',
-                                         model_quantization_cfg=f'{config_path}/yolov8n-seg-{input_height}-{input_width}.quantization.cfg')
+    ret = rknn.hybrid_quantization_step2(model_input=f'{config_path}/{model_name}-{input_height}-{input_width}.model',
+                                         data_input=f'{config_path}/{model_name}-{input_height}-{input_width}.data',
+                                         model_quantization_cfg=f'{config_path}/{model_name}-{input_height}-{input_width}.quantization.cfg')
     
     if ret != 0:
         print('hybrid_quantization_step2 failed!')
