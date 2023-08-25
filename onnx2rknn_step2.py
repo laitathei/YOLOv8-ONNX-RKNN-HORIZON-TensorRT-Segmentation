@@ -90,5 +90,6 @@ if __name__ == '__main__':
             print('--> Save inference result')
         else:
             print("No segmentation result")
+    print("RKNN inference finish")
     rknn.release()
     cv2.destroyAllWindows()
