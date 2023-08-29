@@ -51,5 +51,6 @@ python3 rknn_lite_inference.py
 ## Reference
 ```
 https://blog.csdn.net/magic_ll/article/details/131944207
+https://blog.csdn.net/weixin_45377629/article/details/124582404#t18
 https://github.com/ibaiGorordo/ONNX-YOLOv8-Instance-Segmentation
 ```
