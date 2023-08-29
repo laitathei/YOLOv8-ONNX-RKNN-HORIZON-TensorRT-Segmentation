@@ -48,7 +48,16 @@ python3 onnx2rknn_step2.py
 python3 rknn_lite_inference.py
 ```
 
-## 6. Convert ONNX model to Horizon
+## 6. Horizon Prerequisite
+```
+wget -c ftp://xj3ftp@vrftp.horizon.ai/ai_toolchain/ai_toolchain.tar.gz --ftp-password=xj3ftp@123$%
+tar -xvf ai_toolchain.tar.gz
+cd ai_toolchain/
+pip3 install h*
+```
+
+
+## 7. Convert ONNX model to Horizon
 Remember to change the variable to your setting and get onnx file from ```python3 pytorch2onnx.py``` with ```opset 11```
 ```
 sh 01_check.sh
@@ -56,13 +65,13 @@ sh 02_preprocess.sh
 sh 03_build.sh
 ```
 
-## 7. Horizon Inference
+## 8. Horizon Inference
 ```
 python3 horizion_simulator_inference.py
 python3 horizion_onboard_inference.py
 ```
 
-## 8. Onnx Runtime Inference
+## 89. Onnx Runtime Inference
 ```
 python3 onnxruntime_inference.py
 ```
