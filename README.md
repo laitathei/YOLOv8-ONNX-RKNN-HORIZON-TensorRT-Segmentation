@@ -49,7 +49,7 @@ python3 rknn_lite_inference.py
 ```
 
 ## 6. Convert ONNX model to Horizon
-Remember to change the variable to your setting
+Remember to change the variable to your setting and get onnx file from ```python3 pytorch2onnx.py``` with ```opset 11```
 ```
 sh 01_check.sh
 sh 02_preprocess.sh
