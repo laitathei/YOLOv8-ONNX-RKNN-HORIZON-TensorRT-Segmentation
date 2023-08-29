@@ -22,11 +22,11 @@ images = sess.get_inputs()[0].name
 output0 = sess.get_outputs()[0].name
 output1 = sess.get_outputs()[1].name
 
-if video_inference == True:
-    isExist = os.path.exists(result_path)
-    if not isExist:
-        os.makedirs(result_path)
+isExist = os.path.exists(result_path)
+if not isExist:
+    os.makedirs(result_path)
     
+if video_inference == True:    
     cap = cv2.VideoCapture(video_path)
     while(True):
         ret, image_3c = cap.read()
