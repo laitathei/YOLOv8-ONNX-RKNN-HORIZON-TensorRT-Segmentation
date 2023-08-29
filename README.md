@@ -48,6 +48,20 @@ python3 onnx2rknn_step2.py
 python3 rknn_lite_inference.py
 ```
 
+## 6. Convert ONNX model to Horizon
+Remember to change the variable to your setting
+```
+sh 01_check.sh
+sh 02_preprocess.sh
+sh 03_build.sh
+```
+
+## 7. Horizon Inference
+```
+python3 horizion_simulator_inference.py
+python3 horizion_onboard_inference.py
+```
+
 ## Reference
 ```
 https://blog.csdn.net/magic_ll/article/details/131944207
