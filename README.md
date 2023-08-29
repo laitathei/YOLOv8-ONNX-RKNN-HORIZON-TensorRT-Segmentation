@@ -62,6 +62,11 @@ python3 horizion_simulator_inference.py
 python3 horizion_onboard_inference.py
 ```
 
+## 8. Onnx Runtime Inference
+```
+python3 onnxruntime_inference.py
+```
+
 ## Reference
 ```
 https://blog.csdn.net/magic_ll/article/details/131944207
