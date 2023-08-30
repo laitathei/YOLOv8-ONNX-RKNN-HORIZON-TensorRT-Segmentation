@@ -8,7 +8,7 @@
 
 import os
 import sys
-
+sys.path.append('./utils')
 import click
 import numpy as np
 from preprocess import calibration_transformers
