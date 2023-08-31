@@ -56,7 +56,6 @@ cd ai_toolchain/
 pip3 install h*
 ```
 
-
 ## 7. Convert ONNX model to Horizon
 Remember to change the variable to your setting include ```yolov8seg_config.yaml``` and get onnx file from ```python3 pytorch2onnx.py``` with ```opset 11```
 ```
