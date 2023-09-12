@@ -13,6 +13,7 @@ torch: 1.10.1+cu102
 torchvision: 0.11.2+cu102
 onnx: 1.10.0
 onnxruntime: 1.10.0
+TensorRT: 8.6.1
 ```
 
 ## 1. Yolov8 Prerequisite
@@ -57,7 +58,11 @@ pip3 install h*
 ```
 
 ## 7. Convert ONNX model to Horizon
-Remember to change the variable to your setting include ```yolov8seg_config.yaml``` and get onnx file from ```python3 pytorch2onnx.py``` with ```opset 11```
+Remember to change the variable to your setting include ```yolov8seg_config.yaml``` and get onnx file from ```python3 pytorch2onnx.py``` and replace
+```
+model.export(format="onnx", imgsz=[input_height,input_width], opset=11)
+```
+
 ```
 sh 01_check.sh
 sh 02_preprocess.sh
@@ -73,6 +78,17 @@ python3 horizion_onboard_inference.py
 ## 9. Onnx Runtime Inference
 ```
 python3 onnxruntime_inference.py
+```
+
+## 10. Convert ONNX model to TensorRT 
+Remember to change the variable to your setting
+```
+python3 onnx2trt.py
+```
+
+## 11. TensorRT Inference
+```
+python3 tensorrt_inference.py
 ```
 
 ## Reference
