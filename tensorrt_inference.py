@@ -1,4 +1,5 @@
 import cv2, json
+import numpy as np
 import tensorrt as trt
 import pycuda.driver as cuda
 import pycuda.autoinit
