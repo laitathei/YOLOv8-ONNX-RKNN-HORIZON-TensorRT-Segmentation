@@ -9,10 +9,15 @@ git clone --recursive https://github.com/laitathei/YOLOv8-ONNX-RKNN-HORIZON-Segm
 ```
 ## 0. Environment Setting
 ```
+# For onnx, rknn, horizon
 torch: 1.10.1+cu102
 torchvision: 0.11.2+cu102
 onnx: 1.10.0
 onnxruntime: 1.10.0
+
+# For tensorrt
+torch: 1.11.0+cu113
+torchvision: 0.12.0+cu113
 TensorRT: 8.6.1
 ```
 
