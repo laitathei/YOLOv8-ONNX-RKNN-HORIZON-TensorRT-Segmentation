@@ -59,7 +59,7 @@ if __name__ == '__main__':
         'batch': batch_size,
         'imgsz': [input_height, input_width],
         'names': CLASSES}  # model metadata
-    print(metadata)
+
     # Write file
     with builder.build_engine(network, config) as engine, open(TensorRT_MODEL, 'wb') as t:
         # Metadata
