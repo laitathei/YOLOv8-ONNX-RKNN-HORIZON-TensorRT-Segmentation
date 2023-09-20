@@ -96,6 +96,12 @@ python3 onnx2trt.py
 python3 tensorrt_inference.py
 ```
 
+## 12. Blob Inference
+Convert model from onnx to blob format via ```https://blobconverter.luxonis.com/```
+```
+python3 blob_inference.py
+```
+
 ## Reference
 ```
 https://blog.csdn.net/magic_ll/article/details/131944207
